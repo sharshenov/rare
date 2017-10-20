@@ -7,7 +7,9 @@ module Rare
     end
 
     def throttle(rpm:, key: 'default')
-      sleep sleep_interval until allowed?(seconds(rpm), key)
+      if rpm.to_f > 0
+        sleep sleep_interval until allowed?(seconds(rpm), key)
+      end
 
       yield if block_given?
     end
